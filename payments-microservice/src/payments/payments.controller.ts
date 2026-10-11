@@ -6,6 +6,8 @@ import {
   Req,
   Headers,
   BadRequestException,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { PaymentSessionDto } from './dto/payment-session.dto';
@@ -44,6 +46,7 @@ export class PaymentsController {
   }
 
   @Post('webhook')
+  @HttpCode(HttpStatus.OK)
   async stripeWebhook(
     @Req() req: Request,
     @Headers('stripe-signature') signature: string,

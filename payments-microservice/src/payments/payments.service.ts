@@ -30,14 +30,13 @@ export class PaymentsService {
     }));
 
     const session = await this.stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
       success_url: successUrl,
       cancel_url: cancelUrl,
       payment_intent_data: {
         metadata: {
-          orderId: orderId, // Requisito: el orderId viaja en el metadata
+          orderId: orderId,
         },
       },
     });
